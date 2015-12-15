@@ -19,8 +19,9 @@ public class FindLargest extends ConsoleProgram {
 		int max = 0;
 		while (true) {
 			int value = readInt ("?: ");
-			if (value == SENTINEL) break;
-			if (value > max) {
+			if (value == SENTINEL) {
+				break;
+			} else if (value > max) {
 				max = value;
 			}
 		}
