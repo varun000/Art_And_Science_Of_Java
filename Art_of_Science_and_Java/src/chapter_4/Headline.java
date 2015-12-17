@@ -21,17 +21,18 @@ public class Headline extends GraphicsProgram {
 		/*
 		 * Create GLable and add it to the canvas.
 		 */
-		double x = getWidth() + 1;
-		double y = getHeight() * 0.7;
-		GLabel headline = new GLabel ("DEWEY DEFEATS TRUMAN", x, y);
+		GLabel headline = new GLabel ("DEWEY DEFEATS TRUMAN", 0, 0);
 		headline.setFont("Sans Serif-300");
 		headline.setColor(Color.RED);
 		add(headline);
+		double x = getWidth();
+		double y = (getHeight()/2) + (headline.getAscent()/2);
+		headline.setLocation(x, y);
+		
 		/*
 		 * Loop starts here.
 		 * To move from right to left, it decreases 1 pixel every time on the x axis.
 		 */
-		
 		int dx = -1;
 		int dy = 0;
 		while (true) {
