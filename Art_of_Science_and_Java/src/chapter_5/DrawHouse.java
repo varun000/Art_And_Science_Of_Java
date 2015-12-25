@@ -94,13 +94,3 @@ public class DrawHouse extends GraphicsProgram {
 		add(new GRect (x + (2 * WINDOW_BLOCK_WIDTH), y + WINDOW_BLOCK_HEIGHT, WINDOW_BLOCK_WIDTH, WINDOW_BLOCK_HEIGHT));
 	}
 }
-
-
-
-
-
-
-
-
-
-
