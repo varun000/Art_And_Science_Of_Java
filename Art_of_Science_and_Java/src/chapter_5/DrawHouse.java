@@ -10,17 +10,21 @@ import acm.program.*;
 import acm.graphics.*;
 
 public class DrawHouse extends GraphicsProgram {
-	/* Private Constants */
+	/*
+	 *  Private Constants
+	 *  House frame width and height.
+	 *  House gap is the GAP between house and .
+	 */
 	public static final double HOUSE_WIDTH = 400;
 	public static final double HOUSE_HEIGHT = 300;
-	public static final double HOUSE_INSET = 10;
+	public static final double HOUSE_GAP = 10;
 
 	public static final double WINDOW_BLOCK_WIDTH = 30;
 	public static final double WINDOW_BLOCK_HEIGHT = 40;
-	public static final double WINDOW_INSET = 70;
+	public static final double WINDOW_GAP = 70;
 
 	public static final double DOOR_KNOB_RADIUS = 5;
-	public static final double DOOR_KNOB_INSET = 10;
+	public static final double DOOR_KNOB_GAP = 10;
 	
 	public static final double DOOR_WIDTH = 60;
 	public static final double DOOR_HEIGHT = 100;
@@ -28,7 +32,7 @@ public class DrawHouse extends GraphicsProgram {
 	public void run() {
 		
 		double x = (getWidth() / 2) - (HOUSE_WIDTH / 2);
-		double y = (getHeight() - HOUSE_HEIGHT - HOUSE_INSET);
+		double y = (getHeight() - HOUSE_HEIGHT - HOUSE_GAP);
 		
 		drawHouse(x, y);
 		drawRoof(x, y);
@@ -67,7 +71,7 @@ public class DrawHouse extends GraphicsProgram {
 	/* Door knob for the door */
 	private void drawDoorKnob(double x, double y) {
 		
-		double kx = x + DOOR_WIDTH - DOOR_KNOB_INSET - (2 * DOOR_KNOB_RADIUS);
+		double kx = x + DOOR_WIDTH - DOOR_KNOB_GAP - (2 * DOOR_KNOB_RADIUS);
 		double ky = y + (DOOR_HEIGHT / 2);
 		
 		add(new GOval (kx, ky, 2 * DOOR_KNOB_RADIUS, 2 * DOOR_KNOB_RADIUS));
