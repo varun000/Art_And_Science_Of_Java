@@ -5,7 +5,7 @@
  * from a complete deck of 52 playing cards.
  */
 
-package chapter_6.Programming_Exercises;
+package chapter_6.Programming_Exercises.Exercise_1;
 
 import acm.program.*;
 import acm.util.*;

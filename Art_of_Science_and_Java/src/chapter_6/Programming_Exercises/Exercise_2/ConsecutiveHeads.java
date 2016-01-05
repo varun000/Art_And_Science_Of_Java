@@ -7,7 +7,7 @@
  * the coin was flipped.
  */
 
-package chapter_6.Programming_Exercises;
+package chapter_6.Programming_Exercises.Exercise_2;
 
 import acm.program.*;
 import acm.util.*;
