@@ -39,6 +39,10 @@ public class ConsecutiveHeads extends ConsoleProgram {
 		println("It took " + counter + " flips to get 3 consecutive heads.");
 	}
 
+	/**
+	 * Toss the coin to find Heads or Tails.
+	 * @return Returns the value of toss
+	 */
 	private String flipCoin() {
 		String toss = rgen.nextBoolean() ? "Heads" : "Tails";
 		return toss;
