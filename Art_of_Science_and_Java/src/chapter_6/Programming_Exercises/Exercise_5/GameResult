@@ -1,0 +1,10 @@
+
+BAR			BAR			BAR				Pays $250
+BELL		BELL		BELL / BAR		Pays $20
+PLUM		PLUM		PLUM / BAR		Pays $14
+ORANGE		ORANGE		ORANGE / BAR	Pays $10
+CHERRY		CHERRY		CHERRY			Pays $7
+CHERRY		CHERRY		------			Pays $5
+CHERRY		------		------			Pays $2
+
+------  == Any option.
