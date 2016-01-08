@@ -35,129 +35,87 @@ public class MathQuizV2 extends ConsoleProgram {
 	 */
 	private void formAQuestion() {
 		for (int i = 0; i < NQUESTIONS; i++) {
-			generateQuestions();
+			generateQuestion();
 		}
 	}
 
 	/**
-	 * This method creates two random integers and one random operator
-	 * which has to be included in the question.
+	 * This method creates two random integers and one random operator which has
+	 * to be included in the question.
 	 */
-	private void generateQuestions() {
+	private void generateQuestion() {
 		while (true) {
-			int integerOne = generateIntegerOne();
-			int integerTwo = generateIntegerTwo();
+			int integerOne = generateIntegers();
+			int integerTwo = generateIntegers();
 			String operator = generateOperator();
 
-			askQuestions(integerOne, integerTwo, operator);
-			break;
+			if (validNumbers(integerOne, integerTwo, operator)) {
+				validateUserAnswers(integerOne, integerTwo, operator);
+				break;
+			}
 		}
 	}
 
 	/**
-	 * This method do the calculations depending on the random operator 
-	 * and stores the answer in to a variable to be used for comparison 
-	 * with the answer given by the student.
-	 * @param integerOne A random integer generated between 0 and 20
-	 * @param integer Two Second random integer generated between 0 and 20
-	 * @param operator Random operator generated between + or -
+	 * 
+	 * @param integerOne Random integer between 0 and 20
+	 * @param integerTwo Random integer between 0 and 20
+	 * @param operator An operator generated randomly between + or -
+	 * @return Returns true or false by checking the given condition
 	 */
-	private void askQuestions(int integerOne, int integerTwo, String operator) {
-		int addition = integerOne + integerTwo;
-		int subtraction = integerOne - integerTwo;
-
-		if (operator.equals("+"))  {
-			isPlus(addition, subtraction, integerOne, integerTwo, operator);
-		} else {
-			isMinus(subtraction, addition, integerOne, integerTwo, operator);
-		}		
-	}
-
-	/**
-	 * This method decides that the question has to use the generated random numbers or not
-	 * when the question includes addition.
-	 * @param subtraction Subtraction of generated integers
-	 * @param addition Addition of generated integers
-	 * @param integer One Random integer generated
-	 * @param integer Two Second random integer generated
-	 * @param operator Random operator generated
-	 */
-	private void isPlus(int addition, int subtraction, int integerOne, int integerTwo, String operator) {
-		if (addition < 20) {
-			int question = readInt("What is " + integerOne + " " + operator + " " + integerTwo + "? ");
-			checkCorrectAnswer(addition, subtraction, question, operator);
-		} else {
-			generateQuestions();
+	private boolean validNumbers(int integerOne, int integerTwo, String operator) {
+		if (operator.equals("+")) {
+			return integerOne + integerTwo <= 20;
+		} else if (operator.equals("-")) {
+			return integerOne - integerTwo <= 20 && integerOne - integerTwo >= 0;
 		}
+		println("Unsupported operator");
+		return false;
 	}
 
+	
 	/**
-	 * This method decides that the question has to use the generated random numbers or not
-	 * when the question includes subtraction.
-	 * @param subtraction Subtraction of generated integers
-	 * @param addition Addition of generated integers
-	 * @param integer One Random integer generated
-	 * @param integer Two Second random integer generated
+	 * This method validates the user input and displays the message according to the user input.
+	 * @param integerOne Random integer between 0 and 20
+	 * @param integerTwo Random integer between 0 and 20
 	 * @param operator Random operator generated
 	 */
-	private void isMinus(int subtraction, int addition, int integerOne, int integerTwo, String operator) {
-		if (subtraction > 0 && subtraction < 20) {
-			int question = readInt("What is " + integerOne + " " + operator + " " + integerTwo + "? ");
-			checkCorrectAnswer(addition, subtraction, question, operator);
+	private void validateUserAnswers(int integerOne, int integerTwo, String operator) {
+		int actualAnswer;
+		
+		if (operator.equals("+")) {
+			actualAnswer = integerOne + integerTwo;
 		} else {
-			generateQuestions();
+			actualAnswer = integerOne - integerTwo;
 		}
-	}
-
-	/**
-	 * This method is the main logic which set some particular rules to the student
-	 * and also displays the messages when user inputs an answer.
-	 * @param subtraction Subtraction of generated integers
-	 * @param addition Addition of generated integers
-	 * @param question User answer is stored in this variable
-	 * @param operator Random operator generated
-	 */
-	private void checkCorrectAnswer(int addition, int subtraction, int question, String operator) {
-		int tryAgain = 0;
+		
 		int displayFeedback = generateRandomMessage();
 		String feedback = displayMessage(displayFeedback);
-		for (int i = 0; i < TRIES; i++) {
-			if (operator.equals("+")) {
-				if (question == addition) {
-					println(feedback);
-					break;
+		int givenAnswer = readInt("What is " + integerOne + " " + operator + " " + integerTwo + "? ");
+		
+		for (int tryAgain = 0; tryAgain < TRIES; tryAgain++) {
+			if (actualAnswer == givenAnswer) {
+				println(feedback);
+				break;
+			} else {
+				if (tryAgain == 2) {
+					println("The correct answer is " + actualAnswer);
 				} else {
-					if (tryAgain == 2) {
-						println("The correct answer is " + addition);
-					} else {
-						question = readInt("That's incorrect - try a different answer: ");
-						tryAgain++;
-					}
-				}
-			} else if (operator.equals("-")) {
-				if (question == subtraction) {
-					println(feedback);
-					break;
-				} else {
-					if (tryAgain == 2) {
-						println("The correct answer is " + subtraction);
-					} else {
-						question = readInt("That's incorrect - try a different answer: ");
-						tryAgain++;
-					}
+					givenAnswer = readInt("That's incorrect - try a different answer: ");
 				}
 			}
 		}
 	}
 
 	/**
-	 * This method returns a message which has to be displayed when user gives the correct answer.
+	 * This method returns a message which has to be displayed when user gives
+	 * the correct answer.
 	 * @param feedback Generated random integer
 	 * @return Returns a message stored in the string
 	 */
 	private String displayMessage(int feedback) {
 		String convertedFeedback = null;
-		switch(feedback) {
+		switch (feedback) {
 		case 1:
 			convertedFeedback = "Correct!";
 			break;
@@ -181,18 +139,9 @@ public class MathQuizV2 extends ConsoleProgram {
 	 * Generates and returns random integer between 0 and 20.
 	 * @return Returns an integer
 	 */
-	private int generateIntegerOne() {
+	private int generateIntegers() {
 		int integerOne = rgen.nextInt(0, 20);
 		return integerOne;
-	}
-
-	/**
-	 * Generates and returns random integer between 0 and 20.
-	 * @return Returns an integer
-	 */
-	private int generateIntegerTwo() {
-		int integerTwo = rgen.nextInt(0, 20);
-		return integerTwo;
 	}
 
 	/**
